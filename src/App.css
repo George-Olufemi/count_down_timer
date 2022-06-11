@@ -18,8 +18,8 @@ body{
 }
 .timer{
   background-color: rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex: column;
+  /* display: flex;
+  flex: column; */
   align-items: center;
   justify-content: center;
   padding-bottom: 7em;
@@ -35,13 +35,17 @@ body{
 .timer-icon{
   font-size: 8em;
 }
+
 h2{
   font-weight: 600;
+  margin-top: 5px;
   margin-bottom: 0.5em;
 }
+
 .timer div:first-child p{
   color: #f8f8f8;
 }
+
 .timer div:last-child{
   border: 1px solid #ffffff;
   border-radius: 3px;
@@ -50,14 +54,29 @@ h2{
   margin-top:3em;
   padding: 3em;
   text-align: center;
-  margin-right: 6px;
+  /* margin-right: 6px; */
 }
 section p:first-child,.timer div:last-child span{
   font-size: 3em;
 }@media screen and (max-width: 480px) {
   .timer div:last-child{
-    margin-left: 2em;
+    margin-left: 3em;
     margin-right: 3em;
     padding: 3em 1em;
   }
+}
+
+.main {
+  display: block;
+  padding-top: 150px;
+}
+
+.time {
+  max-width: 1000px;
+  margin-left: 220px;
+}
+
+.pic {
+  width: 120px;
+  height: 120px;
 }
