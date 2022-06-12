@@ -1,23 +1,80 @@
-import logo from './logo.svg';
+import React,{useRef, useState} from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
+  const[ timerDays, setTimerDays] =useState('00');
+  const[ timerHours, setTimerHours] =useState('00');
+  const[ timerMinutes, setTimerMinutes] =useState('00');
+  const[ timerSeconds, setTimerSeconds] =useState('00');
+
+  let interval = useRef();
+
+  const startTimer = () => {
+    const countdownDate = new Date('June 30 2022 00:00:00 ').getTime();
+  };
+
+  interval = setInterval(() => {
+    const now = new Date().getTime();
+    const distance =  - now;
+    
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance & (1000 * 60 * 60 * 24) / (1000*60*60)));
+    const minutes = Math.floor((distance & (1000 * 60 * 60 )) / (1000 * 60 ));
+    const seconds = Math.floor((distance & (1000 * 60 ))) / 1000;
+
+    if (distance < 0 ){
+      // stop timer   
+      clearInterval(interval)
+    } else
+    // update timer
+    setTimerDays(days);
+    setTimerHours(hours);
+    setTimerMinutes(minutes);
+    setTimerSeconds(seconds);
+
+  }, 1000);
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <section className="timer-container">
+        <section className='timer'>
+          {/* #first-child */}
+          <div>
+            <span className=''></span>
+            <h2>Countdown Timer</h2>
+            <p>Countdown to Our Services!. One you should never miss.</p>
+          </div>
+
+          <div>
+            <section>
+              <p>30</p>
+              <p><small>Days</small></p>
+            </section>
+            <span>:</span>
+
+            <section>
+              <p>30</p>
+              <p><small>Hours</small></p>
+            </section>
+            <span>:</span>
+
+            <section>
+              <p>30</p>
+              <p><small>Minutes</small></p>
+            </section>
+            <span>:</span>
+
+            <section>
+              <p>30</p>
+              <p><small>Seconds</small></p>
+            </section>
+            
+          </div>
+        </section>
+
+      </section>
     </div>
   );
 }
