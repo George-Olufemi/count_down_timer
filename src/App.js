@@ -1,4 +1,4 @@
-import React,{useRef, useState} from 'react';
+import React,{useEffect, useRef, useState} from 'react';
 import './App.css';
 
 const App = () => {
@@ -18,22 +18,31 @@ const App = () => {
     const distance =  - now;
     
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance & (1000 * 60 * 60 * 24) / (1000*60*60)));
-    const minutes = Math.floor((distance & (1000 * 60 * 60 )) / (1000 * 60 ));
-    const seconds = Math.floor((distance & (1000 * 60 ))) / 1000;
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24) / (1000*60*60)));
+    const minutes = Math.floor((distance % (1000 * 60 * 60 )) / (1000 * 60 ));
+    const seconds = Math.floor(((distance % (1000 * 60 ))) / 1000);
 
     if (distance < 0 ){
       // stop timer   
-      clearInterval(interval)
-    } else
-    // update timer
-    setTimerDays(days);
-    setTimerHours(hours);
-    setTimerMinutes(minutes);
-    setTimerSeconds(seconds);
+      clearInterval(interval.current);
+    } else {
+     // update timer
+     setTimerDays(days);
+     setTimerHours(hours);
+     setTimerMinutes(minutes);
+     setTimerSeconds(seconds);
+   }
 
   }, 1000);
 
+
+  //componentDidMount
+   useEffect(() => {
+     startTimer();
+     return() => {
+      clearInterval(interval.current);
+     };
+   });
 
 
   return (
@@ -49,25 +58,26 @@ const App = () => {
 
           <div>
             <section>
-              <p>30</p>
+              <p>{timerDays}</p>
               <p><small>Days</small></p>
             </section>
             <span>:</span>
 
             <section>
-              <p>30</p>
+              <p>{timerHours}</p>
               <p><small>Hours</small></p>
             </section>
             <span>:</span>
 
             <section>
-              <p>30</p>
+              <p>{timerMinutes}</p>
               <p><small>Minutes</small></p>
             </section>
             <span>:</span>
 
             <section>
-              <p>30</p>
+              <p>{timerSeconds}</p>
+              <p></p>
               <p><small>Seconds</small></p>
             </section>
             
