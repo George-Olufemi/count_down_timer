@@ -10,30 +10,30 @@ const App = () => {
   let interval = useRef();
 
   const startTimer = () => {
-    const countdownDate = new Date('June 30 2022 00:00:00 ').getTime();
+    const countdownDate = new Date('June 30 2022 00:00:00').getTime();
+
+    interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = countdownDate - now;
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24) / (1000*60*60)));
+      const minutes = Math.floor((distance % (1000 * 60 * 60 )) / (1000 * 60 ));
+      const seconds = Math.floor(((distance % (1000 * 60 ))) / 1000);
+  
+      if (distance < 0 ){
+        // stop timer   
+        clearInterval(interval.current);
+      } else {
+       // update timer
+       setTimerDays(days);
+       setTimerHours(hours);
+       setTimerMinutes(minutes);
+       setTimerSeconds(seconds);
+      }
+    }, 1000);
+  
   };
-
-  interval = setInterval(() => {
-    const now = new Date().getTime();
-    const distance =  - now;
-    
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24) / (1000*60*60)));
-    const minutes = Math.floor((distance % (1000 * 60 * 60 )) / (1000 * 60 ));
-    const seconds = Math.floor(((distance % (1000 * 60 ))) / 1000);
-
-    if (distance < 0 ){
-      // stop timer   
-      clearInterval(interval.current);
-    } else {
-     // update timer
-    setTimerDays(days);
-    setTimerHours(hours);
-    setTimerMinutes(minutes);
-    setTimerSeconds(seconds);
-  }
-
-  }, 1000);
 
 
   //componentDidMount
@@ -54,7 +54,7 @@ const App = () => {
             <span className=''><svg xmlns="http://www.w3.org/2000/svg" className="pic h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg></span>
-            <h2>Countdown Timer</h2>
+            <h2>Countdown To Our Next Service</h2>
             <p>Countdown to Our Services!. One you should never miss.</p>
           </div>
 
